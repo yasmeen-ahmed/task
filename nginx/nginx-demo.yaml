@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-static-html
+  namespace: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: 428971313062.dkr.ecr.us-east-1.amazonaws.com/nginx-static-html:latest
+        ports:
+        - containerPort: 80
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-static-html
+  namespace: nginx
+spec:
+  selector:
+    app: kubernetes-docker-nginx-static-html-demo
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort
+  selector:
+    app: nginx
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-static-html
+  namespace: nginx
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/tags: Environment=prod,Team=test
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /static.html
+            pathType: Exact
+            backend:
+              service:
+                name: nginx-static-html
+                port:
+                  number: 80
