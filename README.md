@@ -56,5 +56,7 @@ to setup the same resource in different Environment just overwrite terraform.tfv
 
 ------------------------------------------------------------------------------------------------------
 incase the Environment is production the argocd app source link with master branch
+
 incase the Environment is development the argocd app source link with dev branch
+
 incase the Environment is staging the argocd app source link with staging branch
