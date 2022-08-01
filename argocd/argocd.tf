@@ -32,7 +32,7 @@ resource "argocd_application" "nginx-app" {
     source {
       repo_url        = "https://github.com/yasmeen-ahmed/task"
       path            = "nginx"
-      target_revision = "master"
+      target_revision = "staging"
 
     }
 
@@ -62,7 +62,7 @@ resource "argocd_application" "nginx-app" {
       source {
         repo_url        = "https://github.com/yasmeen-ahmed/task"
         path            = "api-app"
-        target_revision = "master"
+        target_revision = "staging"
 
       }
 

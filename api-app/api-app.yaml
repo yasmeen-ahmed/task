@@ -50,7 +50,7 @@ metadata:
   namespace: echoserver
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
+    alb.ingress.kubernetes.io/tags: Environment=stg,Team=test
 spec:
   ingressClassName: alb
   rules:
