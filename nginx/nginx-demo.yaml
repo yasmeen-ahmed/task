@@ -55,7 +55,7 @@ metadata:
   namespace: nginx
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/tags: Environment=prod,Team=test
+    alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
 spec:
   ingressClassName: alb
   rules:
